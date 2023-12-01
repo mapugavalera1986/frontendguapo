@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>NeuroDispuesta ::Agregar o modificar participante</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<div class="navbar-nav">
+					<a th:href="@{/inscritos}" class="nav-item nav-link">Volver</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="container">
+			<div class="row" style="min-height: 120px;"></div>
+			<div class="row">
+				<div class="col">
+				</div>
+				<div class="col">
+					<h4 th:if="${participante.participanteId == 0}">Agregar participante</h4>
+					<h4 th:if="${participante.participanteId > 0}">Modificar participante</h4>
+					<br>
+					<form action="#" th:action="@{/inscritos/guardar}" th:object="${participante}" method="post">
+						<input type="hidden" th:field="*{participanteId}" name="participanteId" id="participanteId">
+						<div class="form-group">
+							<label for="nmbrs">Nombre</label> <input type="text" class="form-control" id="nmbrs"
+								th:field="*{nmbrs}" name="nmbrs">
+						</div>
+						<br>
+						<div class="form-group">
+							<label for="apllds">Apellido</label> <input type="text" class="form-control" id="apllds"
+								th:field="*{apllds}" name="apllds">
+						</div>
+						<br>
+						<div class="form-group">
+							<label for="dni">DNI</label> <input type="text" class="form-control" id="dni"
+								th:field="*{dni}" name="dni">
+						</div>
+						<br>
+						<div class="form-group">
+							<label for="correoE">Correo E.</label> <input type="text" class="form-control" id="correoE"
+								th:field="*{correoE}" name="correoE">
+						</div>
+						<br>
+						<div class="form-group">
+							<label for="telf">Celular</label> <input type="text" class="form-control" id="telf"
+								th:field="*{telf}" name="telf">
+						</div>
+						<br>
+						<div class="form-group">
+							<label for="telf">Fecha de registro</label> <input type="date" class="form-control"
+								id="fechaRegistro" th:field="*{fechaRegistro}" name="fechaRegistro">
+						</div>
+						<br>
+						<div class="form-group blu-margin">
+							<label for="cuidadorId">Elegir cuidador</label><select class="form-control"
+								th:field="*{cuidadorId}" id="cuidadorId">
+								<option th:each="ec : ${elegir_cuidadores}" th:value="${ec.cuidadorId}"
+									th:text="'Cuidador: ' + ${ec.cuidadorId} + ': ' +${ec.nmbrs} + ' ' + ${ec.apllds}"></option>
+							</select>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-success">Guardar</button>
+						<button type="submit" class="btn btn-warning"
+							th:formaction="@{/inscritos/volver}">Cancelar</button>
+					</form>
+				</div>
+				<div class="col">
+				</div>
+			</div>
+		</div>
+		<div class="row" style="min-height: 120px;"></div>
+	</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

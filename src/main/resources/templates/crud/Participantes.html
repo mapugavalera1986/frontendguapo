@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>NeuroDispuesta :: Gestión de participantes inscritos</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+		<div class="container-fluid">
+			<a th:href="@{/}" class="navbar-brand">
+				<img th:src="@{images/Tango_icon_nature.svg}" height="28" alt="NeuroDispuesta">
+			</a>
+			<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<div class="navbar-nav">
+					<a th:href="@{/especialistas}" class="nav-item nav-link">Especialistas</a>
+					<a th:href="@{/inscritos}" class="nav-item nav-link active">Inscritos</a>
+					<a th:href="@{/apoderados}" class="nav-item nav-link">Apoderados</a>
+					<a th:href="@{/citas}" class="nav-item nav-link">Citas</a>
+				</div>
+				<div class="navbar-nav ms-auto">
+					<a th:href="@{/perfil}" class="nav-item nav-link">Mi perfil</a>
+					<a th:href="@{/salir}" class="nav-item nav-link text-danger">Salir</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="container">
+			<div class="row" style="min-height: 120px;"></div>
+			<div class="row">
+				<div class="col">
+				</div>
+				<div class="col" style="min-width: 75%;">
+					<div th:if="${list.isEmpty()}">
+						<h4>No se ha inscrito participantes</h4>
+						<br>
+						<p>Puedes registrar uno nuevo utilizando los botones de la parte posterior. Procura que todo
+							participante inscrito tenga su respectivo cuidador.</p>
+						<br>
+					</div>
+					<div th:if="${!list.isEmpty()}">
+						<h4>Participantes registrados</h4>
+						<br>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Nombre</th>
+									<th>Apellido</th>
+									<th>DNI</th>
+									<th>Correo electrónico</th>
+									<th>Teléfono</th>
+									<th>Registro</th>
+									<th>Cuidador</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="participante : ${list}">
+									<td th:text="${participante.nmbrs}">
+									<td th:text="${participante.apllds}">
+									<td th:text="${participante.dni}">
+									<td th:text="${participante.correoE}">
+									<td th:text="${participante.telf}">
+									<td th:text="${participante.fechaRegistro}">
+									<td><a class="btn btn-secondary"
+											th:href="@{/apoderados/{id}(id=${participante.cuidadorId})}">Ver</a></td>
+									<td><a class="btn btn-info"
+											th:href="@{/inscritos/{id}(id=${participante.participanteId})}">Editar</a>
+									</td>
+									<td><a class="btn btn-danger"
+											th:href="@{/inscritos/{id}/eliminar(id=${participante.participanteId})}">Eliminar</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="d-flex">
+						<a th:href="@{/inscritos/0}" class="btn btn-primary">Agregar</a>
+					</div>
+				</div>
+				<div class="col">
+				</div>
+			</div>
+			<div class="row" style="min-height: 120px;"></div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+</body>
+</html>
